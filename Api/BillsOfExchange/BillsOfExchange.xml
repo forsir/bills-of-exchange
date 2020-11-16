@@ -1,0 +1,1384 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillsOfExchange</name>
+    </assembly>
+    <members>
+        <member name="T:BillsOfExchange.Attributes.LogMethodAttribute">
+            <summary>
+            Atribut pro označení metody k logování
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Attributes.LogMethodInterceptor">
+            <summary>
+            IMethodInterceptor implementace pro logování metod (SimpleProxy)
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Attributes.LogMethodInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{BillsOfExchange.Attributes.LogMethodInterceptor})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:BillsOfExchange.Attributes.LogMethodInterceptor.BeforeInvoke(SimpleProxy.InvocationContext)">
+            <summary>
+            Metoda vyvolaná na začátku volání logované metody
+            </summary>
+            <param name="invocationContext"></param>
+        </member>
+        <member name="M:BillsOfExchange.Attributes.LogMethodInterceptor.AfterInvoke(SimpleProxy.InvocationContext,System.Object)">
+            <summary>
+            Metoda vyvolaná na konci volání logované metody
+            </summary>
+            <param name="invocationContext"></param>
+            <param name="methodResult"></param>
+        </member>
+        <member name="T:BillsOfExchange.Base.IAsyncQuery`2">
+            <summary>
+            Query - asynchronní operace s Modelem
+            </summary>
+            <typeparam name="T">Typ parametru</typeparam>
+            <typeparam name="TResult">Návratový typ</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Base.IAsyncQuery`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>Asynchronní volání Query</summary>
+            <param name="parameter">Parametr</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Base.IAsyncQuery`3">
+            <summary>
+            Query - asynchronní Execute se dvěma parametry
+            </summary>
+            <typeparam name="T1">Typ parametru 1</typeparam>
+            <typeparam name="T2">Typ parametru 2</typeparam>
+            <typeparam name="TResult">Návratový typ</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Base.IAsyncQuery`3.ExecuteAsync(`0,`1,System.Threading.CancellationToken)">
+            <summary>Asynchronní volání Query</summary>
+            <param name="parameter1">Parametr 1</param>
+            <param name="parameter2">Parametr 2</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Base.IAsyncRequestHandler`2">
+            <summary>
+            RequestHandler - asynchronní operace s Contractem
+            </summary>
+            <typeparam name="T">Typ parametru</typeparam>
+            <typeparam name="TResult">Návratový typ</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Base.IAsyncRequestHandler`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>Asynchronní volání RequestHandleru</summary>
+            <param name="parameter">Parametr</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Base.IMapper`2">
+            <summary>
+            Mapuje objekty typu <typeparamref name="TSource" /> na <typeparamref name="TDestination" />.
+            </summary>
+            <typeparam name="TSource">Typ zdrojového objektu</typeparam>
+            <typeparam name="TDestination">Typ cílového objektu</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Base.IMapper`2.Map(`0,`1)">
+            <summary>
+            Mapuje zdroj na cíl
+            </summary>
+            <param name="source">Zdrojový objekt</param>
+            <param name="destination">Cílový objekt</param>
+        </member>
+        <member name="T:BillsOfExchange.Base.IValidator`1">
+            <summary>
+            Validátor objektů
+            </summary>
+            <typeparam name="T">Typ entity, která je validována</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Base.IValidator`1.Validate(`0)">
+            <summary>
+            Validace objektu
+            </summary>
+            <param name="objectToValidate">Validovaný objekt</param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Base.ValidatorResult">
+            <summary>
+            Vásledek validace
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Base.ValidatorResult.HasError">
+            <summary>
+            Obsahuje chyby
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Base.ValidatorResult.ValidationErrors">
+            <summary>
+            Kolekce chyb
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Base.ValidatorResult.SetError(System.String)">
+            <summary>
+            Přidá validační chybu do resultu
+            </summary>
+            <param name="error">Message</param>
+        </member>
+        <member name="T:BillsOfExchange.Constants.EnvironmentKeys">
+            <summary>
+            Konstanty Environment prostředí
+            </summary>
+        </member>
+        <member name="F:BillsOfExchange.Constants.EnvironmentKeys.AspNetCoreUrls">
+            <summary>
+            Nastavení URL pro běh aplikace
+            </summary>
+        </member>
+        <member name="F:BillsOfExchange.Constants.EnvironmentKeys.UsePollingFileWatcher">
+            <summary>
+            Nastavení použití aktivního způsobu sledování změn filesystému
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.BillOfExchange">
+            <summary>
+            Bill of Exchange is a security representing amount of something
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchange.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchange.Drawer">
+            <summary>
+            Party that issued the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchange.Beneficiary">
+            <summary>
+            Party that was the Bill issued to
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchange.Amount">
+            <summary>
+            Amount of goods the Bill represents
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchange.ValidatorResult">
+            <summary>
+            Output from Validator
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.BillOfExchangeEndorsments">
+            <summary>
+            Seřazené rubopisy směnky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchangeEndorsments.BillOfExchange">
+            <summary>
+            Směnka
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchangeEndorsments.Endorsments">
+            <summary>
+            Rubopisy
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.BillOfExchangeEndorsments.ValidatorResult">
+            <summary>
+            Výsup validátoru
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.Endorsment">
+            <summary>
+            Endorsement can change the Beneficiary of a Bill
+            Endorsements are ordered, the Beneficiary of the last Endorsement is entitled to the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Endorsment.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Endorsment.BillId">
+            <summary>
+            Bill the endorsement is attached to
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Endorsment.NewBeneficiaryId">
+            <summary>
+            New beneficiary entitled to the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Endorsment.PreviousEndorsementId">
+            <summary>
+            Previous endorsement in the order
+            Is null when the endorsement is first in the order
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Endorsment.NewBeneficiary">
+            <summary>
+            New beneficiary entitled to the Bill
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.PagedResult`1">
+            <summary>
+            Stránka dat
+            </summary>
+            <typeparam name="T">Typ dat na stránce</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Contracts.PagedResult`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="totalRowCount">Celkový počet objektů</param>
+            <param name="result">Pole objektů</param>
+            <param name="currentPage">Číslo stránky, která je součástí tohoto objktu</param>
+            <param name="pageSize">Velikost stránky</param>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PagedResult`1.TotalRowCount">
+            <summary>
+            Celkový počet objektů
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PagedResult`1.Result">
+            <summary>
+            Pole objektů
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PagedResult`1.CurrentPage">
+            <summary>
+            Číslo stránky, která je součástí tohoto objktu
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PagedResult`1.PageSize">
+            <summary>
+            Velikost stránky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PagedResult`1.TotalPageCount">
+            <summary>
+            Celkový počet stránek
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.PageRequest">
+            <summary>
+            Požadavek na stránkovaná data
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PageRequest.Page">
+            <summary>
+            Číslo stránky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PageRequest.PageSize">
+            <summary>
+            Velikost stránky
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.Party">
+            <summary>
+            Represents a legal person
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Party.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Party.Name">
+            <summary>
+            Full name of the person
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.Party.ValidatorResult">
+            <summary>
+            Výstup validátoru
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Contracts.PartyBillsOfExchange">
+            <summary>
+            Směnky osoby
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PartyBillsOfExchange.Party">
+            <summary>
+            Osoba
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PartyBillsOfExchange.BillsOfExchange">
+            <summary>
+            Směnky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Contracts.PartyBillsOfExchange.ValidatorResult">
+            <summary>
+            Výstup validátoru
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Controllers.BillsOfExchangeController">
+            <summary>
+            Směnky 
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.BillsOfExchangeController.#ctor(System.Lazy{BillsOfExchange.RequestHandlers.IGetBillsOfExchangeRequestHandler},System.Lazy{BillsOfExchange.RequestHandlers.IGetEndorsmentsRequestHandler})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getBillsOfExchangeRequestHandler"><see cref="T:BillsOfExchange.RequestHandlers.IGetBillsOfExchangeRequestHandler"/></param>
+            <param name="getEndorsmentsRequestHandler"><see cref="T:BillsOfExchange.RequestHandlers.IGetEndorsmentsRequestHandler"/></param>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.BillsOfExchangeController.Get(BillsOfExchange.Contracts.PageRequest,System.Threading.CancellationToken)">
+            <summary>
+            Směnky - stránkovaně
+            </summary>
+            <param name="pageRequest"><see cref="T:BillsOfExchange.Contracts.PageRequest"/></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.BillsOfExchangeController.GetEndorsments(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Směnka s rubopisy dle ID směnky
+            </summary>
+            <param name="billOfExchangeId">ID směnky</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Controllers.PartiesController">
+            <summary>
+            Osoby
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.PartiesController.#ctor(System.Lazy{BillsOfExchange.RequestHandlers.IGetPartiesRequestHandler},System.Lazy{BillsOfExchange.RequestHandlers.IGetPartyIssuedBillsOfExchangeRequestHandler},System.Lazy{BillsOfExchange.RequestHandlers.IGetPartyOwnedBillsOfExchangeRequestHandler})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getPartiesRequestHandler"><see cref="T:BillsOfExchange.RequestHandlers.IGetPartiesRequestHandler"/></param>
+            <param name="getPartyIssuedBillsOfExchangeRequestHandler"><see cref="T:BillsOfExchange.RequestHandlers.IGetPartyIssuedBillsOfExchangeRequestHandler"/></param>
+            <param name="getPartyOwnedBillsOfExchangeRequestHandler"><see cref="T:BillsOfExchange.RequestHandlers.IGetPartyOwnedBillsOfExchangeRequestHandler"/></param>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.PartiesController.Get(BillsOfExchange.Contracts.PageRequest,System.Threading.CancellationToken)">
+            <summary>
+            Osoby - stránkovaně
+            </summary>
+            <param name="pageRequest"><see cref="T:BillsOfExchange.Contracts.PageRequest"/></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.PartiesController.GetPartyIssuedBillsOfExchange(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Směnky, které vydala osoba dle ID osoby
+            </summary>
+            <param name="partyId">ID osoby</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Controllers.PartiesController.GetPartyOwnedBillsOfExchange(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Směnky, které osoba vlastní dle ID osoby
+            </summary>
+            <param name="partyId">ID osoby</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Exceptions.NotFoundException">
+            <summary>
+            Chyba nenalezeno
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.NotFoundException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.NotFoundException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.NotFoundException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Exceptions.SequenceInteruptedException">
+            <summary>
+            Chyba neintegrity posloupnosti
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.SequenceInteruptedException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.SequenceInteruptedException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Exceptions.SequenceInteruptedException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Extensions.CorsExtensions">
+            <summary>
+            Cors Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.CorsExtensions.AddDefaultCors(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Přidá základní nastavení CORS
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.EndorsmentsExtensions">
+            <summary>
+            Endorsments Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.EndorsmentsExtensions.SequenceSort(System.Collections.Generic.IEnumerable{BillsOfExchange.Models.Endorsment})">
+            <summary>
+            Seřadí rubopisy od nejnovějšího po nejstarší dle hierarchie
+            </summary>
+            <param name="endorsements"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.HttpResponseExtensions">
+            <summary>
+            HttpResponse Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.HttpResponseExtensions.WriteJson``1(Microsoft.AspNetCore.Http.HttpResponse,``0,System.String)">
+            <summary>
+            Zapíše objekt jako json do response
+            </summary>
+            <typeparam name="T">Typ vstupního objektu</typeparam>
+            <param name="response">Http response</param>
+            <param name="obj"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.KestrelExtensions">
+            <summary>
+            Kestrel Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.KestrelExtensions.DefaultKestrelConfig(System.Int32,System.Boolean,System.Nullable{System.Int64},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Nastaví defaultní hodnoty Kestrelu 
+            </summary>
+            <param name="targetPort">Port na kterém bude aplikace dostupná (default: 5000)</param>
+            <param name="allowSynchronousIo">Povolí async operace (default: true)</param>
+            <param name="maxRequestBodySize">Limit velikosti přijímaných dat (default: null)</param>
+            <param name="requestHeadersTimeout">Limit timeoutu získávání HTTP hlaviček (default: 600s)</param>
+            <param name="keepAliveTimeout">Nastavení KeepAlive (default: 600s)</param>
+            <param name="maxStreamsPerConnection">Limit paralelních streamů v připojení</param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.LoggerBuilderExtensions">
+            <summary>
+            LoggerBuilder Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.LoggerBuilderExtensions.CreateDefaultLogger">
+            <summary>
+            Vytváří defaultní konfiguraci loggeru
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.MapperExtensions">
+            <summary>
+            Mapper Extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.MapperExtensions.Map``2(BillsOfExchange.Base.IMapper{``0,``1},``0)">
+            <summary>
+            Zkrácená varianta mapování IMapper
+            </summary>
+            <typeparam name="TSource">Typ zdrojového objektu</typeparam>
+            <typeparam name="TDestination">Typ cílového objektu</typeparam>
+            <param name="mapper">IMapper</param>
+            <param name="source">Zdrojový objekt</param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.MapperExtensions.MapList``2(BillsOfExchange.Base.IMapper{``0,``1},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Zkrácená varianta mapování IMapper pro pole
+            </summary>
+            <typeparam name="TSource">Typ zdrojového objektu</typeparam>
+            <typeparam name="TDestination">Typ cílového objektu</typeparam>
+            <param name="mapper">IMapper</param>
+            <param name="source">Zdrojový objekt</param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.ServiceCollectionExtensions.MapperServiceCollectionExtensions">
+            <summary>
+            IMapper IServiceCollection extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.MapperServiceCollectionExtensions.AddMappers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Přidá mappery do IoC
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.MapperServiceCollectionExtensions.getMappers">
+            <summary>
+            Získá implementované typy mapperů v aplikaci
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.ServiceCollectionExtensions.QueriesServiceCollectionExtensions">
+            <summary>
+            IAsyncQuery IServiceCollection extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.QueriesServiceCollectionExtensions.AddQueries(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Přidá Queries do IoC
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.QueriesServiceCollectionExtensions.getQueries">
+            <summary>
+            Získá implementované typy queries v aplikaci
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.ServiceCollectionExtensions.RequestHandlersServiceCollectionExtensions">
+            <summary>
+            IAsyncRequestHandler IServiceCollection extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.RequestHandlersServiceCollectionExtensions.AddRequestHandlers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Přidá RequestHandlers do IoC
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.RequestHandlersServiceCollectionExtensions.getRequestHandlers">
+            <summary>
+            Získá implementované typy requestHandlers v aplikaci
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Extensions.ServiceCollectionExtensions.ValidatorsServiceCollectionExtensions">
+            <summary>
+            IValidator IServiceCollection extensions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.ValidatorsServiceCollectionExtensions.AddValidators(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Přidá IValidator do IoC
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:BillsOfExchange.Extensions.ServiceCollectionExtensions.ValidatorsServiceCollectionExtensions.getValidators">
+            <summary>
+            Získá implementované typy IValidator v aplikaci
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Helpers.DataProviderHelper">
+            <summary>
+            DataProvider Helper
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Helpers.DataProviderHelper.GetArrayDataFromJson``1(Microsoft.Extensions.FileProviders.IFileInfo)">
+            <summary>
+            Deserializuje data z jsou souboru
+            </summary>
+            <typeparam name="T">Cílový typ</typeparam>
+            <param name="jsonFile">FileInfo json souboru</param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Mappers.ModelBillOfExchangeEndorsmentsToContractBillOfExchangeEndorsmentsMapper">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelBillOfExchangeEndorsmentsToContractBillOfExchangeEndorsmentsMapper.#ctor(BillsOfExchange.Base.IMapper{BillsOfExchange.Models.BillOfExchange,BillsOfExchange.Contracts.BillOfExchange},BillsOfExchange.Base.IMapper{BillsOfExchange.Models.Endorsment,BillsOfExchange.Contracts.Endorsment})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="modelBillOfExchangeToContractBillOfExchangeMapper"></param>
+            <param name="modelEndorsmentToContractEndorsmentMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelBillOfExchangeEndorsmentsToContractBillOfExchangeEndorsmentsMapper.Map(BillsOfExchange.Models.BillOfExchangeEndorsments,BillsOfExchange.Contracts.BillOfExchangeEndorsments)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Mappers.ModelBillOfExchangeToContractBillOfExchangeMapper">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelBillOfExchangeToContractBillOfExchangeMapper.#ctor(BillsOfExchange.Base.IMapper{BillsOfExchange.Models.Party,BillsOfExchange.Contracts.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="modelPartyToContractPartyMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelBillOfExchangeToContractBillOfExchangeMapper.Map(BillsOfExchange.Models.BillOfExchange,BillsOfExchange.Contracts.BillOfExchange)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Mappers.ModelEndorsmentToContractEndorsmentMapper">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelEndorsmentToContractEndorsmentMapper.#ctor(BillsOfExchange.Base.IMapper{BillsOfExchange.Models.Party,BillsOfExchange.Contracts.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="modelPartyToContractPartyMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelEndorsmentToContractEndorsmentMapper.Map(BillsOfExchange.Models.Endorsment,BillsOfExchange.Contracts.Endorsment)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Mappers.ModelPartyBillsOfExchangeToContractPartyBillsOfExchangeMapper">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelPartyBillsOfExchangeToContractPartyBillsOfExchangeMapper.#ctor(BillsOfExchange.Base.IMapper{BillsOfExchange.Models.BillOfExchange,BillsOfExchange.Contracts.BillOfExchange},BillsOfExchange.Base.IMapper{BillsOfExchange.Models.Party,BillsOfExchange.Contracts.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="modelBillOfExchangeToContractBillOfExchangeMapper"></param>
+            <param name="modelPartyToContractPartyMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelPartyBillsOfExchangeToContractPartyBillsOfExchangeMapper.Map(BillsOfExchange.Models.PartyBillsOfExchange,BillsOfExchange.Contracts.PartyBillsOfExchange)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Mappers.ModelPartyToContractPartyMapper">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Mappers.ModelPartyToContractPartyMapper.Map(BillsOfExchange.Models.Party,BillsOfExchange.Contracts.Party)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Middlewares.ExceptionProblemDetailHandler">
+            <summary>
+            Middleware pro zpracování exceptions
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Middlewares.ExceptionProblemDetailHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Middleware invoke
+            </summary>
+            <param name="context">HttpContext</param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Middlewares.ExceptionProblemDetailHandler.ProcessException(System.Exception,System.Net.HttpStatusCode@)">
+            <summary>
+            Zpracování chyby na ProblemDetail
+            </summary>
+            <param name="exception"></param>
+            <param name="httpStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Middlewares.ResponseCacheMiddleware">
+            <summary>
+            Middleware pro response caching
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Middlewares.ResponseCacheMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:BillsOfExchange.Middlewares.ResponseCacheMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Middleware invoke
+            </summary>
+            <param name="context">HttpContext</param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Models.BillOfExchange">
+            <summary>
+            Bill of Exchange is a security representing amount of something
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.DrawerId">
+            <summary>
+            Party that issued the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.Drawer">
+            <summary>
+            Party that issued the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.BeneficiaryId">
+            <summary>
+            Party that was the Bill issued to
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.Beneficiary">
+            <summary>
+            Party that was the Bill issued to
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.Amount">
+            <summary>
+            Amount of goods the Bill represents
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchange.ValidatorResult">
+            <summary>
+            Output from Validator
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.BillOfExchangeEndorsments">
+            <summary>
+            Seřazené rubopisy směnky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchangeEndorsments.BillOfExchange">
+            <summary>
+            Směnka
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchangeEndorsments.Endorsments">
+            <summary>
+            Rubopisy
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.BillOfExchangeEndorsments.ValidatorResult">
+            <summary>
+            Výsup validátoru
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.DataSource`1">
+            <summary>
+            Zdroj dat
+            </summary>
+            <typeparam name="T">Typ dat</typeparam>
+        </member>
+        <member name="P:BillsOfExchange.Models.DataSource`1.Count">
+            <summary>
+            Celkový počet
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.DataSource`1.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.Endorsment">
+            <summary>
+            Endorsement can change the Beneficiary of a Bill
+            Endorsements are ordered, the Beneficiary of the last Endorsement is entitled to the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Endorsment.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Endorsment.BillId">
+            <summary>
+            Bill the endorsement is attached to
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Endorsment.NewBeneficiary">
+            <summary>
+            New beneficiary entitled to the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Endorsment.NewBeneficiaryId">
+            <summary>
+            New beneficiary entitled to the Bill
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Endorsment.PreviousEndorsementId">
+            <summary>
+            Previous endorsement in the order
+            Is null when the endorsement is first in the order
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.PagedResult`1">
+            <summary>
+            Stránka dat
+            </summary>
+            <typeparam name="T">Typ dat na stránce</typeparam>
+        </member>
+        <member name="M:BillsOfExchange.Models.PagedResult`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="totalRowCount">Celkový počet objektů</param>
+            <param name="result">Pole objektů</param>
+            <param name="currentPage">Číslo stránky, která je součástí tohoto objktu</param>
+            <param name="pageSize">Velikost stránky</param>
+        </member>
+        <member name="P:BillsOfExchange.Models.PagedResult`1.TotalRowCount">
+            <summary>
+            Celkový počet objektů
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PagedResult`1.Result">
+            <summary>
+            Pole objektů
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PagedResult`1.CurrentPage">
+            <summary>
+            Číslo stránky, která je součástí tohoto objktu
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PagedResult`1.PageSize">
+            <summary>
+            Velikost stránky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PagedResult`1.TotalPageCount">
+            <summary>
+            Celkový počet stránek
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.Party">
+            <summary>
+            Represents a legal person
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Party.Id">
+            <summary>
+            PK
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Party.Name">
+            <summary>
+            Full name of the person
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.Party.ValidatorResult">
+            <summary>
+            Output from Validator
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Models.PartyBillsOfExchange">
+            <summary>
+            Směnky osoby
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PartyBillsOfExchange.Party">
+            <summary>
+            Osoba
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PartyBillsOfExchange.BillsOfExchange">
+            <summary>
+            Směnky
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Models.PartyBillsOfExchange.ValidatorResult">
+            <summary>
+            Výstup validátoru
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Program">
+            <summary>
+            Zavaděč
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Program.Main(System.String[])">
+            <summary>
+            Vstup
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Vytvoření hosta
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Providers.DataSourceProvider">
+            <summary>
+            DataSource Provider - data z json souborů
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Providers.DataSourceProvider.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Logging.ILogger{BillsOfExchange.Providers.DataSourceProvider},Microsoft.Extensions.FileProviders.IFileProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="memoryCache"></param>
+            <param name="logger"></param>
+            <param name="fileProvider"></param>
+        </member>
+        <member name="M:BillsOfExchange.Providers.DataSourceProvider.EndorsmentsDataSource(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Providers.DataSourceProvider.BillsOfExchangeDataSource(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Providers.DataSourceProvider.PartiesDataSource(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Providers.IDataSourceProvider">
+            <summary>
+            DataSource Provider - data z json souborů
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Providers.IDataSourceProvider.EndorsmentsDataSource(System.Threading.CancellationToken)">
+            <summary>
+            Data Endorsment
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Providers.IDataSourceProvider.BillsOfExchangeDataSource(System.Threading.CancellationToken)">
+            <summary>
+            Data BillOfExchange
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Providers.IDataSourceProvider.PartiesDataSource(System.Threading.CancellationToken)">
+            <summary>
+            Data Party
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Providers.JsonDataFilesProvider">
+            <summary>
+            Provider dat json souborů
+            </summary>
+        </member>
+        <member name="F:BillsOfExchange.Providers.JsonDataFilesProvider.JsonFolder">
+            <summary>
+            Složka s json soubory
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Providers.JsonDataFilesProvider.MaxFilesModified">
+            <summary>
+            Čas poslední modifikace json souborů
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Providers.JsonDataFilesProvider.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Providers.JsonDataFilesProvider.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="root"></param>
+        </member>
+        <member name="M:BillsOfExchange.Providers.JsonDataFilesProvider.#ctor(System.String,Microsoft.Extensions.FileProviders.Physical.ExclusionFilters)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.GetBillsOfExchangeQuery">
+            <summary>
+            Směnky - stránkovaně
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetBillsOfExchangeQuery.#ctor(BillsOfExchange.Repositories.IBillOfExchangeRepository,BillsOfExchange.Base.IValidator{BillsOfExchange.Models.BillOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="billOfExchangeRepository"></param>
+            <param name="billOfExchangeValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetBillsOfExchangeQuery.ExecuteAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.GetEndorsmentsQuery">
+            <summary>
+            Směnka s rubopisy dle ID směnky
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetEndorsmentsQuery.#ctor(BillsOfExchange.Repositories.IBillOfExchangeRepository,BillsOfExchange.Base.IValidator{BillsOfExchange.Models.BillOfExchangeEndorsments})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="billOfExchangeRepository"></param>
+            <param name="billOfExchangeEndorsmentsValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetEndorsmentsQuery.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.GetPartiesQuery">
+            <summary>
+            Osoby - stránkovaně
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartiesQuery.#ctor(BillsOfExchange.Repositories.IPartyRepository,BillsOfExchange.Base.IValidator{BillsOfExchange.Models.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="partyRepository"></param>
+            <param name="partyValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartiesQuery.ExecuteAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.GetPartyIssuedBillsOfExchangeQuery">
+            <summary>
+            Směnky, které vydala osoba dle ID osoby
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartyIssuedBillsOfExchangeQuery.#ctor(BillsOfExchange.Repositories.IPartyRepository,BillsOfExchange.Repositories.IBillOfExchangeRepository,BillsOfExchange.Base.IValidator{BillsOfExchange.Models.PartyBillsOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="partyRepository"></param>
+            <param name="billOfExchangeRepository"></param>
+            <param name="partyBillsOfExchangeValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartyIssuedBillsOfExchangeQuery.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.GetPartyOwnedBillsOfExchangeQuery">
+            <summary>
+            Směnky, které osoba vlastní dle ID osoby
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartyOwnedBillsOfExchangeQuery.#ctor(BillsOfExchange.Repositories.IPartyRepository,BillsOfExchange.Repositories.IBillOfExchangeRepository,BillsOfExchange.Base.IValidator{BillsOfExchange.Models.PartyBillsOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="partyRepository"></param>
+            <param name="billOfExchangeRepository"></param>
+            <param name="partyBillsOfExchangeValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Queries.GetPartyOwnedBillsOfExchangeQuery.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Queries.IGetBillsOfExchangeQuery">
+            <summary>
+            Směnky - stránkovaně
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Queries.IGetEndorsmentsQuery">
+            <summary>
+            Směnka s rubopisy dle ID směnky
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Queries.IGetPartiesQuery">
+            <summary>
+            Osoby - stránkovaně
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Queries.IGetPartyIssuedBillsOfExchangeQuery">
+            <summary>
+            Směnky, které vydala osoba dle ID osoby
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Queries.IGetPartyOwnedBillsOfExchangeQuery">
+            <summary>
+            Směnky, které osoba vlastní dle ID osoby
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Repositories.BillOfExchangeRepository">
+            <summary>
+            BillOfExchange Repository
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.#ctor(BillsOfExchange.Providers.IDataSourceProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="dataSourceProvider"></param>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.GetRowsCount(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.Get(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.GetById(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.GetEndorsments(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.GetIssuedByPartyId(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.BillOfExchangeRepository.GetOwnedByPartyId(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Repositories.IBillOfExchangeRepository">
+            <summary>
+            BillOfExchange repository
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.GetRowsCount(System.Threading.CancellationToken)">
+            <summary>
+            Počet řádků v DataSource
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.Get(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Stránkovaný seznam směnek
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Směnka dle ID
+            </summary>
+            <param name="billOfExchangeId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.GetEndorsments(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Rubopisy směnky
+            </summary>
+            <param name="billOfExchangeId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.GetIssuedByPartyId(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Vydané směnky osoby dle ID osoby
+            </summary>
+            <param name="partyId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IBillOfExchangeRepository.GetOwnedByPartyId(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Vlastněné směnky osoby dle ID osoby
+            </summary>
+            <param name="partyId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Repositories.IPartyRepository">
+            <summary>
+            Party repository
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IPartyRepository.GetRowsCount(System.Threading.CancellationToken)">
+            <summary>
+            Počet řádků v DataSource
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IPartyRepository.Get(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Stránkovaný seznam osob
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.IPartyRepository.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Osoba dle ID
+            </summary>
+            <param name="partyId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BillsOfExchange.Repositories.PartyRepository">
+            <summary>
+            Party repository
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.PartyRepository.#ctor(BillsOfExchange.Providers.IDataSourceProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="dataSourceProvider"></param>
+        </member>
+        <member name="M:BillsOfExchange.Repositories.PartyRepository.GetRowsCount(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.PartyRepository.Get(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:BillsOfExchange.Repositories.PartyRepository.GetById(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.GetBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky - stránkovaně
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetBillsOfExchangeRequestHandler.#ctor(BillsOfExchange.Queries.IGetBillsOfExchangeQuery,BillsOfExchange.Base.IMapper{BillsOfExchange.Models.BillOfExchange,BillsOfExchange.Contracts.BillOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getBillsOfExchangeQuery"></param>
+            <param name="modelBillOfExchangeToContractBillOfExchangeMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetBillsOfExchangeRequestHandler.ExecuteAsync(BillsOfExchange.Contracts.PageRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.GetEndorsmentsRequestHandler">
+            <summary>
+            Směnka s rubopisy dle ID směnky
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetEndorsmentsRequestHandler.#ctor(BillsOfExchange.Queries.IGetEndorsmentsQuery,BillsOfExchange.Base.IMapper{BillsOfExchange.Models.BillOfExchangeEndorsments,BillsOfExchange.Contracts.BillOfExchangeEndorsments})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getEndorsmentsQuery"></param>
+            <param name="modelBillOfExchangeEndorsmentsToContractBillOfExchangeEndorsmentsMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetEndorsmentsRequestHandler.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.GetPartiesRequestHandler">
+            <summary>
+            Osoby - stránkovaně
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartiesRequestHandler.#ctor(BillsOfExchange.Queries.IGetPartiesQuery,BillsOfExchange.Base.IMapper{BillsOfExchange.Models.Party,BillsOfExchange.Contracts.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getPartiesQuery"></param>
+            <param name="modelPartyToContractPartyMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartiesRequestHandler.ExecuteAsync(BillsOfExchange.Contracts.PageRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.GetPartyIssuedBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky, které vydala osoba dle ID osoby
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartyIssuedBillsOfExchangeRequestHandler.#ctor(BillsOfExchange.Queries.IGetPartyIssuedBillsOfExchangeQuery,BillsOfExchange.Base.IMapper{BillsOfExchange.Models.PartyBillsOfExchange,BillsOfExchange.Contracts.PartyBillsOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getPartyIssuedBillsOfExchangeQuery"></param>
+            <param name="modelPartyBillsOfExchangeToContractPartyBillsOfExchangeMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartyIssuedBillsOfExchangeRequestHandler.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.GetPartyOwnedBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky, které osoba vlastní dle ID osoby
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartyOwnedBillsOfExchangeRequestHandler.#ctor(BillsOfExchange.Queries.IGetPartyOwnedBillsOfExchangeQuery,BillsOfExchange.Base.IMapper{BillsOfExchange.Models.PartyBillsOfExchange,BillsOfExchange.Contracts.PartyBillsOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="getPartyOwnedBillsOfExchangeQuery"></param>
+            <param name="modelPartyBillsOfExchangeToContractPartyBillsOfExchangeMapper"></param>
+        </member>
+        <member name="M:BillsOfExchange.RequestHandlers.GetPartyOwnedBillsOfExchangeRequestHandler.ExecuteAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.IGetBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky - stránkovaně
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.IGetEndorsmentsRequestHandler">
+            <summary>
+            Směnka s rubopisy dle ID směnky
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.IGetPartiesRequestHandler">
+            <summary>
+            Osoby - stránkovaně
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.IGetPartyIssuedBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky, které vydala osoba dle ID osoby
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.RequestHandlers.IGetPartyOwnedBillsOfExchangeRequestHandler">
+            <summary>
+            Směnky, které osoba vlastní dle ID osoby
+            </summary>
+        </member>
+        <member name="T:BillsOfExchange.Startup">
+            <summary>
+            Konfigurace Aplikace
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Startup.Configuration">
+            <summary>
+            Konfigurace
+            </summary>
+        </member>
+        <member name="P:BillsOfExchange.Startup.Env">
+            <summary>
+            Environment
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="configuration"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:BillsOfExchange.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Konfigurace IoC
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:BillsOfExchange.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Konfigurace builderu
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:BillsOfExchange.Validators.BillOfExchangeEndorsmentsValidator">
+            <summary>
+            Validátor BillOfExchangeEndorsments
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Validators.BillOfExchangeEndorsmentsValidator.#ctor(BillsOfExchange.Base.IValidator{BillsOfExchange.Models.BillOfExchange},BillsOfExchange.Base.IValidator{BillsOfExchange.Models.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="billsOfExchangeValidator"></param>
+            <param name="partyValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Validators.BillOfExchangeEndorsmentsValidator.Validate(BillsOfExchange.Models.BillOfExchangeEndorsments)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Validators.BillOfExchangeValidator">
+            <summary>
+            Validátor BillOfExchange
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Validators.BillOfExchangeValidator.#ctor(BillsOfExchange.Base.IValidator{BillsOfExchange.Models.Party})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="partyValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Validators.BillOfExchangeValidator.Validate(BillsOfExchange.Models.BillOfExchange)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Validators.PartyBillsOfExchangeValidator">
+            <summary>
+            Validátor PartyBillsOfExchange
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Validators.PartyBillsOfExchangeValidator.#ctor(BillsOfExchange.Base.IValidator{BillsOfExchange.Models.BillOfExchange})">
+            <summary>
+            Ctor
+            </summary>
+            <param name="billsOfExchangeValidator"></param>
+        </member>
+        <member name="M:BillsOfExchange.Validators.PartyBillsOfExchangeValidator.Validate(BillsOfExchange.Models.PartyBillsOfExchange)">
+            <inheritdoc />
+        </member>
+        <member name="T:BillsOfExchange.Validators.PartyValidator">
+            <summary>
+            Validátor Party
+            </summary>
+        </member>
+        <member name="M:BillsOfExchange.Validators.PartyValidator.Validate(BillsOfExchange.Models.Party)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

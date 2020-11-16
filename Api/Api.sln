@@ -5,11 +5,16 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsOfExchange", "BillsOfExchange\BillsOfExchange.csproj", "{7447A951-3578-4704-8546-268840832752}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsOfExchange.Tests", "BillsOfExchange.Tests\BillsOfExchange.Tests.csproj", "{0454ECCF-D1F3-4131-9C04-08654B723D9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsOfExchange.Tests", "BillsOfExchange.Tests\BillsOfExchange.Tests.csproj", "{0454ECCF-D1F3-4131-9C04-08654B723D9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsOfExchange.DataProvider", "BillsOfExchange.DataProvider\BillsOfExchange.DataProvider.csproj", "{D8A87433-56D9-4090-85E4-F54AA96E6679}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsOfExchange.DataProvider", "BillsOfExchange.DataProvider\BillsOfExchange.DataProvider.csproj", "{D8A87433-56D9-4090-85E4-F54AA96E6679}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsOfExchange.DataProvider.Tests", "BillsOfExchange.DataProvider.Tests\BillsOfExchange.DataProvider.Tests.csproj", "{220DEADC-FAF4-4AC5-AA59-C04EC59726CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsOfExchange.DataProvider.Tests", "BillsOfExchange.DataProvider.Tests\BillsOfExchange.DataProvider.Tests.csproj", "{220DEADC-FAF4-4AC5-AA59-C04EC59726CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E718B979-3B3F-4979-AE32-86C837507CA0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

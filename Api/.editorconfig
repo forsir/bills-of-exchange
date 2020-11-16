@@ -1,0 +1,10 @@
+﻿[*.cs]
+
+# IDE1006: Styly pojmenování
+dotnet_diagnostic.IDE1006.severity = none
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = silent
