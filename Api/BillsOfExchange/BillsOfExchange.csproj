@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BillsOfExchange.DTO\BillsOfExchange.DTO.csproj" />
-    <ProjectReference Include="..\BillsOfExchange.Repository\BillsOfExchange.Repository.csproj" />
+    <ProjectReference Include="..\BillsOfExchange.BusinessLayer\BillsOfExchange.BusinessLayer.csproj" />
   </ItemGroup>
 
 

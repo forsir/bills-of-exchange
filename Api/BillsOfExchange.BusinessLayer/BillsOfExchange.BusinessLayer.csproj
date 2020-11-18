@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillsOfExchange.DataProvider\BillsOfExchange.DataProvider.csproj" />
-    <ProjectReference Include="..\BillsOfExchange.DTO\BillsOfExchange.DTO.csproj" />
   </ItemGroup>
 
 </Project>
