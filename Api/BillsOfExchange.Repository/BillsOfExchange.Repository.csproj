@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BillsOfExchange.DataProvider\BillsOfExchange.DataProvider.csproj" />
+    <ProjectReference Include="..\BillsOfExchange.DTO\BillsOfExchange.DTO.csproj" />
+  </ItemGroup>
+
+</Project>
