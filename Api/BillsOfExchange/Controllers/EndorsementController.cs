@@ -9,21 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BillsOfExchange.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class EndorsementController : Controller
-    {
-        private IEndorsementConverter EndorsementConverter { get; }
+	[ApiController]
+	public class EndorsementController : Controller
+	{
+		private IEndorsementConverter EndorsementConverter { get; }
 
-        public EndorsementController(IEndorsementConverter endorsementConverter)
-        {
-            EndorsementConverter = endorsementConverter ?? new EndorsementConverter(null);
-        }
+		public EndorsementController(IEndorsementConverter endorsementConverter = null)
+		{
+			EndorsementConverter = endorsementConverter ?? new EndorsementConverter(null);
+		}
 
-        // GET: Parties
-        public ActionResult<IEnumerable<EndorsmentListDto>> Index(int billOfExchangeId)
-        {
-            return EndorsementConverter.GetByBillOfExhange(billOfExchangeId);
-        }
-    }
+		[Route("endorsement/bybill/{billOfExchangeId:int}")]
+		public ActionResult<IEnumerable<EndorsmentListDto>> Index(int billOfExchangeId)
+		{
+			return EndorsementConverter.GetByBillOfExhange(billOfExchangeId);
+		}
+	}
 }
