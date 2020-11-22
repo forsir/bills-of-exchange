@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BillsOfExchange.BusinessLayer.Checkers;
 using BillsOfExchange.BusinessLayer.Dto;
 using BillsOfExchange.DataProvider;
 using BillsOfExchange.DataProvider.Models;
@@ -14,10 +15,13 @@ namespace BillsOfExchange.BusinessLayer.Converters
 
 		private IPartyRepository PartyRepository { get; }
 
-		public BillOfExchangeConverter(IBillOfExchangeRepository billOfExchangeRepository = null, IPartyRepository partyRepository = null)
+		public IBillOfExchangeChecker BillOfExchangeChecker { get; }
+
+		public BillOfExchangeConverter(IBillOfExchangeRepository billOfExchangeRepository = null, IPartyRepository partyRepository = null, IBillOfExchangeChecker billOfExchangeChecker = null)
 		{
 			BillOfExchangeRepository = billOfExchangeRepository ?? new BillOfExchangeRepository();
 			PartyRepository = partyRepository ?? new PartyRepository();
+			BillOfExchangeChecker = billOfExchangeChecker ?? new BillOfExchangeChecker();
 		}
 
 		private Dictionary<int, string> GetPartiesDictionary(List<int> ids)
@@ -41,6 +45,13 @@ namespace BillsOfExchange.BusinessLayer.Converters
 		public BillOfExchangeDetailDto GetBillOfExchange(int billId)
 		{
 			BillOfExchange bill = BillOfExchangeRepository.GetByIds(new List<int> { billId }).First();
+
+			BillOfExchangeCheckResult result = BillOfExchangeChecker.BillOfExchangeCheck(bill);
+			if (!result.IsCorrect)
+			{
+				throw new Exception(result.Message);
+			}
+
 			Dictionary<int, string> names = GetPartiesDictionary(GetPartiesIds(new List<BillOfExchange> { bill }));
 			return new BillOfExchangeDetailDto(bill.Id, bill.DrawerId, names[bill.DrawerId], bill.BeneficiaryId, names[bill.BeneficiaryId], bill.Amount);
 		}

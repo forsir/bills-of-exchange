@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using BillsOfExchange.BusinessLayer.Converters;
 using BillsOfExchange.BusinessLayer.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +27,14 @@ namespace BillsOfExchange.Controllers
 		[Route("bill/{bullId:int}")]
 		public ActionResult<BillOfExchangeDetailDto> GetBillOfExchange(int bullId)
 		{
-			return BillsOfExchangeConverter.GetBillOfExchange(bullId);
+			try
+			{
+				return BillsOfExchangeConverter.GetBillOfExchange(bullId);
+			}
+			catch (Exception ex)
+			{
+				return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+			}
 		}
 
 		[Route("bills/bybeneficiary/{beneficiaryId:int}")]

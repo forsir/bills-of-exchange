@@ -11,7 +11,7 @@ export const ListPage = () => {
     const [parties, setParties] = React.useState<Party[]>();
 
     React.useEffect(() => {
-        axios.default.get(`${address}/party`)
+        axios.default.get(`${address}/parties`)
             .then(({ data: parties }) => {
                 setParties(parties);
             });

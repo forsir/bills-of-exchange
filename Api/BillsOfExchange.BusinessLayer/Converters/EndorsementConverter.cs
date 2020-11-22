@@ -25,7 +25,7 @@ namespace BillsOfExchange.BusinessLayer.Converters
 			EndorsementRepository = endorsementRepository ?? new EndorsementRepository();
 			this.EndorsementChecker = endorsementChecker ?? new EndorsementChecker();
 			this.BillOfExchangeRepository = billOfExchangeRepository ?? new BillOfExchangeRepository();
-			PartyRepository = partyRepository;
+			PartyRepository = partyRepository ?? new PartyRepository();
 		}
 
 		public List<EndorsmentListDto> GetByBillOfExhange(int billOfExhangeId)
@@ -33,7 +33,7 @@ namespace BillsOfExchange.BusinessLayer.Converters
 			IEnumerable<Endorsement> list = EndorsementRepository.GetByBillIds(new List<int> { billOfExhangeId }).FirstOrDefault()?.ToList() ?? new List<Endorsement>();
 			BillOfExchange billOfExchange = BillOfExchangeRepository.GetByIds(new List<int> { billOfExhangeId }).First();
 
-			var partyNamesDictionary = PartyRepository.GetByIds(list.Select(l => l.NewBeneficiaryId).ToList()).ToDictionary(p => p.Id, p => p.Name);
+			var partyNamesDictionary = PartyRepository.GetByIds(list.Select(l => l.NewBeneficiaryId).Distinct().ToList()).ToDictionary(p => p.Id, p => p.Name);
 
 			EndorsementCheckResult result = EndorsementChecker.CheckList(billOfExchange, list);
 			if (!result.IsCorrect)

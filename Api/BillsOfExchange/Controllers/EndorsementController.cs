@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BillsOfExchange.BusinessLayer.Converters;
@@ -22,7 +23,14 @@ namespace BillsOfExchange.Controllers
 		[Route("endorsement/bybill/{billOfExchangeId:int}")]
 		public ActionResult<IEnumerable<EndorsmentListDto>> Index(int billOfExchangeId)
 		{
-			return EndorsementConverter.GetByBillOfExhange(billOfExchangeId);
+			try
+			{
+				return EndorsementConverter.GetByBillOfExhange(billOfExchangeId);
+			}
+			catch (Exception ex)
+			{
+				return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+			}
 		}
 	}
 }
