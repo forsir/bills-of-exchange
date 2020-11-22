@@ -7,7 +7,7 @@ import { BillList } from "../components/BillList";
 import { Loading } from "../components/Loading";
 
 export const ListPage = () => {
-    const address = '';
+    const address = 'https://localhost:44305';
     const [parties, setParties] = React.useState<Party[]>();
 
     React.useEffect(() => {
@@ -17,7 +17,7 @@ export const ListPage = () => {
             });
     }, []);
 
-    const [bills, setBills] = React.useState<Bill[]>([]);
+    const [bills, setBills] = React.useState<Bill[]>();
 
     React.useEffect(() => {
         axios.default.get(`${address}/bills`)

@@ -12,10 +12,10 @@ export const EndorsementList = (params: ParamType) => {
     return <div>
         <table>
             <thead>
-                <th>
-                    <td>id</td>
-                    <td>new beneficiary</td>
-                </th>
+                <tr>
+                    <th>id</th>
+                    <th>new beneficiary</th>
+                </tr>
             </thead>
             <tbody>
                 {endorsements.map((b, i) => <tr key={i}>

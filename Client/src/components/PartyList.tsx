@@ -12,11 +12,11 @@ export const PartyList = (params: ParamType) => {
     return <div>
         <table>
             <thead>
-                <th>
-                    <td>id</td>
-                    <td>name</td>
-                    <td></td>
-                </th>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 {parties.map((b, i) => <tr key={i}>

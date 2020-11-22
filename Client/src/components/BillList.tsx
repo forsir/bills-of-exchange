@@ -12,13 +12,13 @@ export const BillList = (params: ParamType) => {
     return <div>
         <table>
             <thead>
-                <th>
-                    <td>id</td>
-                    <td>drawer</td>
-                    <td>beneficiary</td>
-                    <td>amount</td>
-                    <td></td>
-                </th>
+                <tr>
+                    <th>id</th>
+                    <th>drawer</th>
+                    <th>beneficiary</th>
+                    <th>amount</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 {bills.map((b, i) => <tr key={i}>

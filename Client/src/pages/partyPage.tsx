@@ -10,12 +10,12 @@ interface ParamTypes {
 }
 
 export const PartyPage = (params) => {
-    let address = '';
+    const address = 'https://localhost:44305';
     let { partyId } = useParams<ParamTypes>();
 
     const [party, setParty] = React.useState<Party>();
     React.useEffect(() => {
-        axios.default.get(`${address}/api/users/${partyId}`)
+        axios.default.get(`${address}/party/${partyId}`)
             .then(({ data: party }) => {
                 setParty(party);
             });
@@ -23,7 +23,7 @@ export const PartyPage = (params) => {
 
     const [billsByDrawer, setBillsByDrawer] = React.useState<Bill[]>();
     React.useEffect(() => {
-        axios.default.get(`${address}/api/users/${partyId}`)
+        axios.default.get(`${address}/bills/bydrawer/${partyId}`)
             .then(({ data: bills }) => {
                 setBillsByDrawer(bills);
             });

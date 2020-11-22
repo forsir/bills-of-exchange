@@ -10,12 +10,12 @@ interface ParamTypes {
 }
 
 export const BillPage = () => {
-    let address = '';
+    const address = 'https://localhost:44305';
     let { billId } = useParams<ParamTypes>();
     const [bill, setBill] = React.useState<Bill>();
 
     React.useEffect(() => {
-        axios.default.get(`${address}/api/users/${billId}`)
+        axios.default.get(`${address}/bill/${billId}`)
             .then(({ data: bill }) => {
                 setBill(bill);
             });
