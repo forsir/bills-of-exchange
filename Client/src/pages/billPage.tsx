@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import * as axios from 'axios';
 import { Bill, Endorsement } from "../components/Types";
 import { BillDetail } from "../components/BillDetail";
-import { Loading } from "../components/Loading";
 import { EndorsementList } from "../components/EndorsementList";
 import { Result } from "../components/Result";
 
@@ -30,7 +29,7 @@ export const BillPage = () => {
                     setBillError(err.message);
                 }
             });
-    }, []);
+    }, [billId]);
 
     const [endorsements, setEndorsements] = React.useState<Endorsement[]>();
     const [endorsementsError, setEndorsementsError] = React.useState<string>();
@@ -47,15 +46,15 @@ export const BillPage = () => {
                     setEndorsementsError(err.message);
                 }
             });
-    }, []);
+    }, [billId]);
 
     return <div>
         <h2>Bill id {billId}</h2>
         <Result isLoading={!bill} errorText={billError}>
-            <BillDetail bill={bill} />
+            <BillDetail bill={bill} lastEndorsement={(endorsements && endorsements.length > 0) ? endorsements[endorsements.length - 1] : undefined} />
         </Result>
         <h2>Endorsements</h2>
-        <Result isLoading={!endorsements} errorText={endorsementsError}>
+        <Result isLoading={!endorsements} isEmpty={endorsements && endorsements.length == 0} errorText={endorsementsError}>
             <EndorsementList endorsements={endorsements} />
         </Result>
         <br />
