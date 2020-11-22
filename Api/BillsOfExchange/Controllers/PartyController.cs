@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BillsOfExchange.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
 	public class PartyController : ControllerBase
 	{
 		private IPartyConverter PartyConverter { get; }
@@ -20,9 +19,16 @@ namespace BillsOfExchange.Controllers
 		}
 
 		// GET: Parties
+		[Route("parties/{page:int?}")]
 		public ActionResult<IEnumerable<PartyListDto>> Index(int? page)
 		{
 			return PartyConverter.GetList(pageSize, pageSize * (page ?? 0));
+		}
+
+		[Route("party/{partyId:int}")]
+		public ActionResult<PartyDetailDto> GetParty(int partyId)
+		{
+			return PartyConverter.GetParty(partyId);
 		}
 	}
 }
