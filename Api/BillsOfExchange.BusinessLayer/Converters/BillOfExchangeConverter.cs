@@ -15,13 +15,20 @@ namespace BillsOfExchange.BusinessLayer.Converters
 
 		private IPartyRepository PartyRepository { get; }
 
-		public IBillOfExchangeChecker BillOfExchangeChecker { get; }
+		private IBillOfExchangeChecker BillOfExchangeChecker { get; }
 
-		public BillOfExchangeConverter(IBillOfExchangeRepository billOfExchangeRepository = null, IPartyRepository partyRepository = null, IBillOfExchangeChecker billOfExchangeChecker = null)
+		private IEndorsementRepository EndorsementRepository { get; }
+
+		public BillOfExchangeConverter(
+			IBillOfExchangeRepository billOfExchangeRepository = null,
+			IPartyRepository partyRepository = null,
+			IBillOfExchangeChecker billOfExchangeChecker = null,
+			IEndorsementRepository endorsementRepository = null)
 		{
 			BillOfExchangeRepository = billOfExchangeRepository ?? new BillOfExchangeRepository();
 			PartyRepository = partyRepository ?? new PartyRepository();
 			BillOfExchangeChecker = billOfExchangeChecker ?? new BillOfExchangeChecker();
+			EndorsementRepository = endorsementRepository ?? new EndorsementRepository();
 		}
 
 		private Dictionary<int, string> GetPartiesDictionary(List<int> ids)
@@ -58,9 +65,19 @@ namespace BillsOfExchange.BusinessLayer.Converters
 
 		public List<BillOfExchangeDetailDto> GetByBeneficiary(int beneficiaryId)
 		{
-			List<BillOfExchange> list = BillOfExchangeRepository.GetByBeneficiaryIds(new List<int> { beneficiaryId }).FirstOrDefault()?.ToList() ?? new List<BillOfExchange>();
-			Dictionary<int, string> names = GetPartiesDictionary(GetPartiesIds(list));
-			return list.ConvertAll(b => new BillOfExchangeDetailDto(b.Id, b.DrawerId, names[b.DrawerId], b.BeneficiaryId, names[b.BeneficiaryId], b.Amount));
+			List<BillOfExchange> allBillsByBeneficiary = BillOfExchangeRepository.GetByBeneficiaryIds(new List<int> { beneficiaryId }).FirstOrDefault()?.ToList() ?? new List<BillOfExchange>();
+			var billIdsWithAtLeastOneEndorsement = new HashSet<int>(EndorsementRepository.GetByBillIds(allBillsByBeneficiary.ConvertAll(b => b.Id)).Select(e => e.First().BillId));
+			var billsByBeneficiaryWithoutAtLeastOneEndorsement = allBillsByBeneficiary.Where(b => !billIdsWithAtLeastOneEndorsement.Contains(b.Id)).ToList();
+
+			var endorsementsWithBenficiaryList = EndorsementRepository.GetByNewBeneficiaryIds(new List<int> { beneficiaryId }).FirstOrDefault()?.ToList();
+			IReadOnlyList<IEnumerable<Endorsement>> allEndorsementByBillList = EndorsementRepository.GetByBillIds(endorsementsWithBenficiaryList.Select(e => e.BillId).Distinct().ToList());
+			var lastEndorsementWithBeneficiaryList = allEndorsementByBillList.Select(el => el.Last()).Where(el => el.NewBeneficiaryId == beneficiaryId).ToList();
+			var billsByLastEndorsement = BillOfExchangeRepository.GetByIds(lastEndorsementWithBeneficiaryList.Select(e => e.BillId).ToList()).ToList();
+			var finishedList = billsByBeneficiaryWithoutAtLeastOneEndorsement.Concat(billsByLastEndorsement).Distinct().ToList();
+
+			Dictionary<int, string> names = GetPartiesDictionary(GetPartiesIds(finishedList));
+
+			return finishedList.ConvertAll(b => new BillOfExchangeDetailDto(b.Id, b.DrawerId, names[b.DrawerId], b.BeneficiaryId, names[b.BeneficiaryId], b.Amount));
 		}
 
 		public List<BillOfExchangeDetailDto> GetByDrawer(int drawerId)
